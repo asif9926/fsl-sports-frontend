@@ -7,9 +7,12 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      // 🔥 এই লাইনটি Dev Mode-এ PWA টেস্ট করার জন্য 
       devOptions: { enabled: true }, 
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      // ✅ নিচের এই অংশটুকু যোগ করা হয়েছে বড় ফাইল সাপোর্ট করার জন্য
+      workbox: {
+        maximumFileSizeToCacheInBytes: 30000000, // ৩০ মেগাবাইট পর্যন্ত ফাইল ক্যাশ করবে
+      },
       manifest: {
         name: 'FSL-SPORTS V2.0',
         short_name: 'FSL-SPORTS',
