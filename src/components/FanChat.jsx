@@ -42,7 +42,7 @@ const FanChat = ({ room = 'global_fanwall' }) => {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end">
+        <div className="fixed bottom-20 right-6 z-[999] flex flex-col items-end">
             
             {/* 💬 Floating Chat Window */}
             {isOpen && (

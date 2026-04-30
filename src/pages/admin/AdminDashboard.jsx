@@ -253,7 +253,7 @@ const AdminDashboard = () => {
                             
                             <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-gray-800 pb-6">
                                 <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                                    <span className="text-amber-500">🏆</span> Smart Score Control System
+                                    <span className="text-amber-500">🏆</span> Smart Score Control
                                 </h2>
                                 
                                 <div className="flex bg-[#050811] p-1.5 rounded-xl border border-gray-800 shadow-inner">
@@ -269,11 +269,11 @@ const AdminDashboard = () => {
                                     <div className="bg-[#050811] border border-gray-800 p-6 rounded-2xl">
                                         <div className="flex justify-between items-center mb-4">
                                             <h3 className="font-bold text-amber-500 uppercase tracking-widest text-sm flex flex-col xl:flex-row xl:items-center gap-1.5">
-                                                <span>Match 1 Settings</span>
+                                                <span>Match 1</span>
                                                 {/* শুধুমাত্র ফুটবলের জন্য Smart Overlay ট্যাগ দেখাবে */}
                                                 {fslSport === 'football' && (
                                                     <span className="text-[9px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-md border border-amber-500/20 w-fit">
-                                                        + Smart Scorecard Overlay
+                                                        + Score Overlay
                                                     </span>
                                                 )}
                                             </h3>
@@ -301,7 +301,7 @@ const AdminDashboard = () => {
                                                         Bottom Text
                                                         {/* শুধুমাত্র ফুটবলের জন্য Set Time ট্যাগ দেখাবে */}
                                                         {fslSport === 'football' && (
-                                                            <span className="text-amber-500 lowercase opacity-80">+ set time (00:00)</span>
+                                                            <span className="text-amber-500 lowercase opacity-80">+ T(00:00)</span>
                                                         )}
                                                     </label>
                                                     <input type="text" value={fslData.match1.bottomText} onChange={(e) => updateFslField('match1', 'bottomText', e.target.value)} className="w-full bg-[#0d131f] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-amber-500" />
@@ -368,7 +368,7 @@ const AdminDashboard = () => {
                                     {/* MATCH 2 SETTINGS */}
                                     <div className="bg-[#050811] border border-gray-800 p-6 rounded-2xl">
                                         <div className="flex justify-between items-center mb-4">
-                                            <h3 className="font-bold text-gray-400 uppercase tracking-widest text-sm">Match 2 Settings</h3>
+                                            <h3 className="font-bold text-gray-400 uppercase tracking-widest text-sm">Match 2</h3>
                                             <label className="flex items-center gap-2 cursor-pointer">
                                                 <input type="checkbox" checked={fslData.match2.isLive} onChange={(e) => updateFslField('match2', 'isLive', e.target.checked)} className="accent-red-500" />
                                                 <span className="text-xs text-gray-400 font-bold uppercase">Show Live Ping</span>

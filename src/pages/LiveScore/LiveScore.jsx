@@ -128,10 +128,10 @@ const LiveScore = () => {
                         <div className="flex items-center gap-3 mb-6"> 
                             <span className="text-2xl animate-bounce">🏆</span> 
                             <h2 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 uppercase tracking-tighter italic"> 
-                                FSL {sport} Update 
+                                {sport} Update 
                             </h2> 
                             <span className="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-500/30 uppercase tracking-widest flex items-center gap-1"> 
-                                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></span> STAY TUNED 
+                                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></span> LIVE
                             </span> 
                         </div> 
 
@@ -250,32 +250,36 @@ const LiveScore = () => {
                                     </div> 
 
                                     {/* ================= CORRECTED DATA MAPPING ================= */}
-                                    <div className="space-y-4 mb-6 flex-grow"> 
-                                        <div className="flex justify-between items-center"> 
-                                            <span className="font-bold text-white truncate pr-2"> 
-                                                {sport === 'football'  
-                                                    ? (match.homeTeam?.name)  
-                                                    : (match.teams?.[0] || match.name?.split(' vs ')[0] || 'Team 1')}
-                                            </span> 
-                                            <span className="text-2xl font-black text-emerald-400"> 
-                                                {sport === 'football'  
-                                                    ? (match.homeScore?.display || '0')  
-                                                    : (match.score?.[0]?.r || '0')} 
-                                            </span> 
-                                        </div> 
-                                        <div className="flex justify-between items-center opacity-80"> 
-                                            <span className="font-bold text-white truncate pr-2"> 
-                                                {sport === 'football'  
-                                                    ? (match.awayTeam?.name)  
-                                                    : (match.teams?.[1] || match.name?.split(' vs ')[1] || 'Team 2')}
-                                            </span> 
-                                            <span className="text-2xl font-black text-emerald-400"> 
-                                                {sport === 'football'  
-                                                    ? (match.awayScore?.display || '0')  
-                                                    : (match.score?.[1]?.r || '0')} 
-                                            </span> 
-                                        </div> 
-                                    </div> 
+<div className="space-y-4 mb-6 flex-grow"> 
+    {/* Team 1 */}
+    <div className="flex justify-between items-center gap-3"> 
+        <span className="font-bold text-white truncate flex-1 text-sm md:text-base"> 
+            {sport === 'football'  
+                ? (match.homeTeam?.name)  
+                : (match.teams?.[0] || match.name?.split(' vs ')[0] || 'Team 1')}
+        </span> 
+        <span className="text-lg md:text-2xl font-black text-emerald-400 shrink-0 text-right"> 
+            {sport === 'football'  
+                ? (match.homeScore?.display || '0')  
+                : (match.score?.[0]?.r || '0')} 
+        </span> 
+    </div> 
+    
+    {/* Team 2 */}
+    <div className="flex justify-between items-center gap-3 opacity-80"> 
+        <span className="font-bold text-white truncate flex-1 text-sm md:text-base"> 
+            {sport === 'football'  
+                ? (match.awayTeam?.name)  
+                : (match.teams?.[1] || match.name?.split(' vs ')[1] || 'Team 2')}
+        </span> 
+        <span className="text-lg md:text-2xl font-black text-emerald-400 shrink-0 text-right"> 
+            {sport === 'football'  
+                ? (match.awayScore?.display || '0')  
+                : (match.score?.[1]?.r || '0')} 
+        </span> 
+    </div> 
+</div> 
+                                   
                                     {/* ======================================================================= */}
 
                                     <div className="pt-4 border-t border-gray-800/50 mt-auto"> 
