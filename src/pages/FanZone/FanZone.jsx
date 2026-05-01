@@ -4,8 +4,6 @@ import { removeBackground } from '@imgly/background-removal';
 import toast from 'react-hot-toast';
 import { frameApi } from '../../api/frame.api';
 import { fanWallApi } from '../../api/fanwall.api';
-
-// 🔥 AI Caption Studio ইম্পোর্ট করা হলো
 import CaptionStudio from '../../components/CaptionStudio';
 
 const FanZone = () => {
@@ -53,7 +51,6 @@ const FanZone = () => {
             height: 400,
             backgroundColor: '#ffffff',
             preserveObjectStacking: true,
-            // 🔥 Prevent default browser touch actions on canvas for mobile
             allowTouchScrolling: false, 
         });
         return () => {
@@ -222,7 +219,6 @@ const FanZone = () => {
         if (!cvs) return;
         cvs.discardActiveObject();
         cvs.renderAll();
-        // 🔥 Fix: multiplier 2.7 (400 x 2.7 = 1080px HD Size for Facebook/Instagram)
         const dataURL = cvs.toDataURL({ format: 'png', quality: 1, multiplier: 2.7 });
         const link = document.createElement('a');
         link.download = `FSL-SPORTS-Post-${Date.now()}.png`;
@@ -241,7 +237,6 @@ const FanZone = () => {
         if (!cvs) return;
         cvs.discardActiveObject();
         cvs.renderAll();
-        // 🔥 Fix: multiplier 2.7 for HD sharing
         const dataURL = cvs.toDataURL({ format: 'png', quality: 1, multiplier: 2.7 });
         try {
             const blob = await (await fetch(dataURL)).blob();
@@ -272,7 +267,6 @@ const FanZone = () => {
         if (!cvs) return;
         cvs.discardActiveObject();
         cvs.renderAll();
-        // 🔥 Fix: multiplier 2.7 for crisp Fan Wall image
         const dataURL = cvs.toDataURL({ format: 'jpeg', quality: 1, multiplier: 2.7 });
         
         setIsPosting(true);
@@ -295,6 +289,7 @@ const FanZone = () => {
 
     return (
         <div className="min-h-screen bg-[#070b14] text-gray-300 flex flex-col pt-6 pb-20 overflow-x-hidden font-sans">
+            {/* Header / Top Action Bar */}
             <div className="w-full max-w-6xl mx-auto px-4 md:px-6 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div className="flex items-center gap-3 self-start md:self-auto">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-emerald-400/20">
@@ -345,12 +340,12 @@ const FanZone = () => {
 
             <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleImageUpload} />
 
-            {/* 🔥 NEW: Layout change for Mobile */}
-            <div className="flex flex-col lg:flex-row gap-0 max-w-6xl mx-auto w-full bg-[#0d131f] border-y md:border border-gray-800 md:rounded-xl shadow-2xl relative">
-                {/* 🔥 Fix 1: Sticky Canvas for mobile */}
-                <div className="w-full lg:flex-1 flex flex-col items-center justify-center p-4 md:p-10 bg-[#0a0f18] min-h-[350px] md:min-h-[500px] sticky top-0 z-40 border-b border-gray-800 lg:border-b-0 lg:static">
+            {/* Main Editor Container - Cleaned up and single layout */}
+            <div className="flex flex-col lg:flex-row items-start gap-0 max-w-6xl mx-auto w-full bg-[#0d131f] border-y md:border border-gray-800 md:rounded-xl shadow-2xl relative">
+
+                {/* Left/Top Area: Canvas (Sticky Setup) */}
+                <div className="w-full lg:flex-1 flex flex-col items-center justify-center p-4 md:p-10 bg-[#0a0f18] min-h-[350px] md:min-h-[500px] sticky top-20 z-40 border-b border-gray-800 lg:border-b-0">
                     
-                    {/* CSS Hack for scaling 400x400 canvas smoothly on small mobile screens */}
                     <div className="relative shadow-2xl bg-white rounded-md overflow-hidden transform scale-[0.8] sm:scale-90 md:scale-100 origin-top" style={{ width: '400px', height: '400px' }}>
                         {!hasImage && (
                             <div 
@@ -361,7 +356,7 @@ const FanZone = () => {
                                 <span className="text-gray-400 font-medium tracking-wide">Click to Upload Image</span>
                             </div>
                         )}
-                        <div className="absolute inset-0 z-10" style={{ touchAction: 'none' }}> {/* 🔥 Fix 2: Prevent Page Scroll */}
+                        <div className="absolute inset-0 z-10" style={{ touchAction: 'none' }}>
                             <canvas ref={canvasElementRef} />
                         </div>
                         {isProcessingBg && (
@@ -373,7 +368,7 @@ const FanZone = () => {
                     </div>
                 </div>
 
-                {/* Bottom/Right Scrollable Adjustments Area */}
+                {/* Right/Bottom Area: Controls (Scrollable) */}
                 <div className="w-full lg:w-[360px] bg-[#0b101a] border-l border-gray-800 p-5 md:p-6 flex flex-col">
                     
                     {/* Frames Selection */}
@@ -415,7 +410,6 @@ const FanZone = () => {
                             <span className="text-gray-400 font-medium">Zoom</span>
                             <span className="text-emerald-500 font-medium">{Math.round(zoom * 100)}%</span>
                         </div>
-                        {/* Larger touch area for slider */}
                         <div className="py-2">
                             <input type="range" min="0.5" max="3" step="0.05" value={zoom} onChange={(e) => handleZoomChange(e.target.value)} disabled={!hasImage} className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500" />
                         </div>
