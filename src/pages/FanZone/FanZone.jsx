@@ -346,8 +346,7 @@ const FanZone = () => {
             <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleImageUpload} />
 
             {/* 🔥 NEW: Layout change for Mobile */}
-            <div className="flex flex-col lg:flex-row gap-0 max-w-6xl mx-auto w-full bg-[#0d131f] border-y md:border border-gray-800 md:rounded-xl overflow-hidden shadow-2xl relative">
-                
+            <div className="flex flex-col lg:flex-row gap-0 max-w-6xl mx-auto w-full bg-[#0d131f] border-y md:border border-gray-800 md:rounded-xl shadow-2xl relative">
                 {/* 🔥 Fix 1: Sticky Canvas for mobile */}
                 <div className="w-full lg:flex-1 flex flex-col items-center justify-center p-4 md:p-10 bg-[#0a0f18] min-h-[350px] md:min-h-[500px] sticky top-0 z-40 border-b border-gray-800 lg:border-b-0 lg:static">
                     
