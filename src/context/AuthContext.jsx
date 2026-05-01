@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     // ============================================
     // 🔄 App start হলে auth check করো
     // ============================================
-    useEffect(() => {
+useEffect(() => {
         const checkAuth = async () => {
             const token = localStorage.getItem('accessToken');
             if (!token) {
@@ -28,11 +28,16 @@ export const AuthProvider = ({ children }) => {
                 const userData = res.data.data || res.data;
                 setUser(userData);
                 setIsAuthenticated(true);
-            } catch {
-                // Token invalid বা expired
-                localStorage.removeItem('accessToken');
-                setUser(null);
-                setIsAuthenticated(false);
+            } catch (error) {
+                // 🔥 THE FIX: শুধুমাত্র 401 Unauthorized (টোকেন মেয়াদ শেষ) হলেই লগআউট হবে!
+                // সার্ভার স্লিপ মোডে থাকলে বা নেটওয়ার্ক এরর হলে লগআউট হবে না!
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('accessToken');
+                    setUser(null);
+                    setIsAuthenticated(false);
+                } else {
+                    console.error("Server might be sleeping or network issue. Token kept alive.");
+                }
             } finally {
                 setLoading(false);
             }

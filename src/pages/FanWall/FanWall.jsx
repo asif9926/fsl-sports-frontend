@@ -95,7 +95,6 @@ const FanWall = () => {
                                         loading="lazy" 
                                         crossOrigin="anonymous"
                                     />
-                                    
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1c] via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
 
                                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
@@ -104,7 +103,6 @@ const FanWall = () => {
                                         </a>
                                     </div>
                                 </div>
-
                                 {/* Footer / User Info Section */}
                                 <div className="p-5 flex items-center justify-between relative z-20">
                                     <div className="flex items-center gap-3">
