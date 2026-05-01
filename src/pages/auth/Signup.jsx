@@ -26,23 +26,24 @@ const Signup = () => {
 
     const handleChange = (e) => setFormData({ ...formData, [e.target.id]: e.target.value });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!strength.isValid) return toast.error('Please make sure your password is strong enough!');
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!strength.isValid) return toast.error('Please make sure your password is strong enough!');
 
-        setLoading(true);
-        const toastId = toast.loading('Creating your account... 🚀');
+    setLoading(true); // এখানে লোডিং শুরু হচ্ছে
+    const toastId = toast.loading('Creating your account... 🚀');
 
-        try {
-            const response = await authApi.signup(formData);
-            toast.success(response.data.message, { id: toastId });
-            localStorage.setItem('verifyEmail', formData.email);
-            setTimeout(() => navigate('/verify'), 1500);
-        } catch (err) {
-            toast.error(err.response?.data?.message || 'Signup failed! ❌', { id: toastId });
-            setLoading(false);
-        }
-    };
+    try {
+        const response = await authApi.signup(formData);
+        toast.success(response.data.message, { id: toastId });
+        localStorage.setItem('verifyEmail', formData.email);
+        setTimeout(() => navigate('/verify'), 1500);
+    } catch (err) {
+        // এই অংশটি যোগ করুন যাতে এরর আসলে বাটন আবার ঠিক হয়ে যায়
+        toast.error(err.response?.data?.message || 'Signup failed! ❌', { id: toastId });
+        setLoading(false); // <--- এটি অত্যন্ত জরুরি[cite: 24]
+    }
+};
 
     const handleGoogleSuccess = async (credentialResponse) => {
         const toastId = toast.loading('Authenticating with Google... ⏳');
